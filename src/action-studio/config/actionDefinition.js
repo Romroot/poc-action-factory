@@ -1,9 +1,12 @@
 export const FETCH_BLOCK_CONFIG = {
   type: 'fetch',
   convertToJSON: (ref) => {
+    let contentsBlock = ref.getInputTargetBlock('SUCCESS_INPUT')
+
+    console.log('contentsBlock', ref)
     return {
-      model: ref.getFieldValue('MODEL'),
-      path: ref.getFieldValue('PATH'),
+      onSuccess: ref.getFieldValue('SUCCESS_INPUT'),
+      onFailure: ref.getFieldValue('FAILED_INPUT'),
     }
   },
   config: {
@@ -23,7 +26,7 @@ export const FETCH_BLOCK_CONFIG = {
       },
       {
         'type': 'input_statement',
-        'name': 'SUCCESS'
+        'name': 'SUCCESS_INPUT'
       },
       {
         'type': 'field_label_serializable',
@@ -32,7 +35,7 @@ export const FETCH_BLOCK_CONFIG = {
       },
       {
         'type': 'input_statement',
-        'name': 'FAILED'
+        'name': 'FAILED_INPUT'
       }
     ],
     'inputsInline': true,
@@ -48,8 +51,7 @@ export const FORM_DATA = {
   type: 'form_data',
   convertToJSON: (ref) => {
     return {
-      model: ref.getFieldValue('MODEL'),
-      path: ref.getFieldValue('PATH'),
+      values: true
     }
   },
   config: {
@@ -64,7 +66,11 @@ export const FORM_DATA = {
 
 export const SPINNER_CONTROL = {
   type: 'spinner_control',
-  convertToJSON: (ref) => {},
+  convertToJSON: (ref) => {
+    return {
+      values: true
+    }
+  },
   config: {
     'type': 'spinner',
     'message0': '%1 %2',
@@ -99,15 +105,62 @@ export const SPINNER_CONTROL = {
 
 export const SET_FORM_ERRORS = {
   type: 'set_form_error',
-  convertToJSON: (ref) => {},
+  convertToJSON: (ref) => {
+    return {
+      values: true
+    }
+  },
   config: {
-    "type": "set_form_error",
-    "message0": "Set Form Errors",
-    "previousStatement": null,
-    "nextStatement": null,
-    "colour": 300,
-    "tooltip": "",
-    "helpUrl": ""
+    'type': 'set_form_error',
+    'message0': 'Set Form Errors',
+    'previousStatement': null,
+    'nextStatement': null,
+    'colour': 300,
+    'tooltip': '',
+    'helpUrl': ''
+  }
+}
+
+export const SHOW_SUCCESS_MESSAGE = {
+  type: 'show_success_message',
+  convertToJSON: (ref) => {
+    return {
+      values: true
+    }
+  },
+  config: {
+    'type': 'show_success_message',
+    'message0': 'Show Success Message',
+    'previousStatement': null,
+    'nextStatement': null,
+    'colour': 90,
+    'tooltip': '',
+    'helpUrl': ''
+  }
+}
+
+export const REDIRECT = {
+  type: 'redirect',
+  convertToJSON: (ref) => {
+    return {
+      values: true
+    }
+  },
+  config: {
+    'type': 'redirect',
+    'message0': 'Redirect to %1',
+    'args0': [
+      {
+        'type': 'field_input',
+        'name': 'URL',
+        'text': '/url'
+      }
+    ],
+    'previousStatement': null,
+    'nextStatement': null,
+    'colour': 105,
+    'tooltip': '',
+    'helpUrl': ''
   }
 }
 

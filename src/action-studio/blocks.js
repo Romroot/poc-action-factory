@@ -1,5 +1,5 @@
 import * as items from './config/actionDefinition'
-import { initBlock } from './support/init'
+import { initBlock } from './support/blockly'
 
 export const BLOCK_CONFIGS = Object.values(items)
 

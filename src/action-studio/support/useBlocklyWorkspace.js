@@ -10,6 +10,15 @@ export const useBlocklyWorkspace = () => {
       toolbox: document.getElementById('toolbox')
     })
     initBlocks()
+
+    try {
+      const blocklySchema = localStorage.getItem('app-data')
+      if (blocklySchema) {
+        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(blocklySchema), workspaceRef.current)
+      }
+    } catch (e) {
+      console.error('Failed to insert default value')
+    }
     return () => workspaceRef.current.dispose()
   }, [])
 
