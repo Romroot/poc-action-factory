@@ -2,7 +2,6 @@ export const FETCH_BLOCK_CONFIG = {
   type: 'fetch',
   convertToJSON: (ref) => {
     let contentsBlock = ref.getInputTargetBlock('SUCCESS_INPUT')
-
     console.log('contentsBlock', ref)
     return {
       onSuccess: ref.getFieldValue('SUCCESS_INPUT'),
